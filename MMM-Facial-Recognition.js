@@ -66,7 +66,8 @@ Module.register('MMM-Facial-Recognition',{
 				Log.log(module.name + ' is shown.');
 			}, {lockString: self.identifier});
 		});
-
+		
+		console.log(this.current_user + " logged in");
 		this.sendNotification("CURRENT_USER", this.current_user);
 	},
 	logout_user: function () {
@@ -97,11 +98,12 @@ Module.register('MMM-Facial-Recognition',{
 			if (payload.user == -1){
 				this.current_user = this.translate("stranger")
 				this.current_user_id = payload.user;
+				this.sendNotification("CURRENT_USER", "stranger");
 			}
 			else{
 				this.current_user = this.config.users[payload.user];
 				this.current_user_id = payload.user;
-				this.login_user()
+				this.login_user();
 			}
 
 			if (this.config.welcomeMessage) {
